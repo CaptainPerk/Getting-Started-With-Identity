@@ -21,6 +21,8 @@ namespace Users
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
                 options.Password.RequiredLength = 12;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireLowercase = true;
