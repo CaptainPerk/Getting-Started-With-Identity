@@ -17,7 +17,14 @@ namespace Users
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 12;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireDigit = true;
+            }).AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
             services.AddMvc();
         }
 
