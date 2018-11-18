@@ -22,7 +22,7 @@ namespace Users.Infrastructure
                 });
             }
 
-            return identityErrors.Any() ? IdentityResult.Success : IdentityResult.Failed(identityErrors.ToArray());
+            return identityErrors.Any() ? IdentityResult.Failed(identityErrors.ToArray()) : IdentityResult.Success;
         }
     }
 }
